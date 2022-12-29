@@ -1,9 +1,10 @@
 import React from 'react'
+import { AiOutlineReload } from 'react-icons/ai'
 import Identicon from 'react-identicons'
 
 const Artwork = () => {
   return (
-    <div className='flex flex-col text-gray-400 w-full mx-auto justify-center items-center '>
+    <div className='flex flex-col text-gray-400 w-full mx-auto justify-center items-center font-globalFont'>
       <h2 className='text-3xl mb-2 font-globalFont font-semibold'>Our Latest Artworks</h2>
       <p className='text-base text-gray-400 font-normal mb-4'>Check out our dailly updated artworks</p>
       
@@ -16,8 +17,8 @@ const Artwork = () => {
           )
         })}
       </div>
-      <div className="text-center mt-8">
-        <button className='px-6 py-3 bg-white rounded-3xl getstarted  text-gray-50'>Load More</button>
+      <div className="flex flex-row justify-center my-5">
+        <button className=' px-6 py-3 bg-white rounded-3xl getstarted text-gray-50 flex flex-row justify-center items-center gap-1'>Load More <AiOutlineReload/></button>
       </div>
     </div>
   )

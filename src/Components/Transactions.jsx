@@ -1,12 +1,13 @@
 import React from 'react';
 import {BiTransfer} from 'react-icons/bi'
+import {AiOutlineReload} from 'react-icons/ai'
 import {MdOpenInNew} from 'react-icons/md'
 
 const Transactions = () => {
   return (
-    <div className='my-10  pb-10 mx-auto'>
-      <h2 className='mb-4 text-gray-400 text-3xl font-globalFont font-semibold text-center'>Transaction History</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-4 lg:gap-2 py-2.5">
+    <div className='my-4  pb-10 mx-auto font-globalFont'>
+      <h2 className='mb-4 text-gray-400 text-3xl font-globalFont font-semibold text-center '>Transaction History</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-4 lg:gap-2 py-2.5 mx-4">
         {Array(5)
         .fill()
         .map((trans,i)=>{
@@ -15,8 +16,8 @@ const Transactions = () => {
           )
         })}
       </div>
-      <div className="text-center my-5">
-        <button className=' px-6 py-3 bg-white rounded-3xl getstarted text-gray-50'>Load More</button>
+      <div className="flex flex-row justify-center mt-5">
+        <button className=' px-6 py-3 bg-white rounded-3xl getstarted text-gray-50 flex flex-row justify-center items-center gap-1'>Load More <AiOutlineReload/></button>
       </div>
     </div>
   )
