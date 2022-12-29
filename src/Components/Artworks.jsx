@@ -8,13 +8,16 @@ const Artwork = () => {
       <p className='text-base text-gray-400 font-normal mb-4'>Check out our dailly updated artworks</p>
       
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 lg:gap-3 py-2.5 mx-4'>
-        {Array(5)
+        {Array(4)
         .fill()
         .map((nft,i)=>{
           return(
             <Card key={i} nft = {nft}/>
           )
         })}
+      </div>
+      <div className="text-center mt-8">
+        <button className='px-6 py-3 bg-white rounded-3xl getstarted  text-gray-50'>Load More</button>
       </div>
     </div>
   )

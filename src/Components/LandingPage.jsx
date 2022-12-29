@@ -2,6 +2,7 @@ import React from 'react'
 import Artworks from './Artworks'
 import Hero from './Hero'
 import NavBar from './NavBar'
+import Transactions from './Transactions'
 
 const LandingPage = () => {
   return (
@@ -9,6 +10,7 @@ const LandingPage = () => {
       <NavBar/>
       <Hero/>
       <Artworks/>
+      <Transactions/>
     </div>
   )
 }
