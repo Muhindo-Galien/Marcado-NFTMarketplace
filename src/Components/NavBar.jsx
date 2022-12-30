@@ -98,8 +98,8 @@ const handeOpenIt = ()=>{
 			</div>
 			<div class="mt-auto">
 				<div class="pt-6 font-globalFont">
-					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" href="#" onClick={()=>setGlobalState('modal', 'scale-100') }>Create</button>
-					<button  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center w-full" href="#">Connect</button>
+					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" href="#" onClick={()=>{setGlobalState('modal', 'scale-100') ,handeOpenIt()}}>Create</button>
+					<button  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center w-full" href="#"  onClick={()=>handeOpenIt()}>Connect</button>
 				
 				</div>
 			</div>
