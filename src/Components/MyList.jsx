@@ -17,7 +17,7 @@ const MyList = () => {
         </div>
        </div>
        <div className='my-6'>
-          <h2 className='text-3xl mb-2 font-globalFont font-semibold text-center text-gray-400'>All My NFT's</h2>
+          <h2 className='text-3xl mb-2 font-globalFont font-semibold text-left mx-4 md:text-center text-gray-400'>All My NFT's</h2>
            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-4 lg:gap-3 py-2.5 mx-4'>
               {Array(4)
               .fill()

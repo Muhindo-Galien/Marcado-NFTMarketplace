@@ -98,8 +98,8 @@ const handeOpenIt = ()=>{
 			</div>
 			<div class="mt-auto">
 				<div class="pt-6 font-globalFont">
-					<a class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center" href="#">Create</a>
-					<a  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center"href="#">Connect</a>
+					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" href="#" onClick={()=>setGlobalState('modal', 'scale-100') }>Create</button>
+					<button  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center w-full" href="#">Connect</button>
 				
 				</div>
 			</div>
