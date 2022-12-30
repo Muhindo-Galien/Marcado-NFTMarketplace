@@ -15,7 +15,7 @@ const CreateNFT = () => {
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    resetForm()
+    closeModal()
   }
   const resetForm = ()=>{
     setFileUrl('')

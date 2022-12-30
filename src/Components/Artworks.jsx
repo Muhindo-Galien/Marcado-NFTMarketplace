@@ -28,7 +28,7 @@ export default Artwork
 
 const Card=({nft})=>{
   return(
-    <div className='p-4 border rounded-xl shadow-sm font-globalFont'>
+    <div className='p-4 border rounded-xl shadow-sm font-globalFont bg-gray-50'>
        <Link to={'/nfts/' + nft}>
 
             <div className='flex justify-between items-center pb-2'>
