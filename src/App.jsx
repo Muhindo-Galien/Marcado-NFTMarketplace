@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import CreateNFT from './Components/CreateNFT'
 import Footer from './Components/Footer'
 import LandingPage from "./Components/LandingPage"
 import MyList from './Components/MyList'
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/nfts/:id" element={<NFTDetails />} />
           <Route path="/my-list" element={<MyList />} />
         </Routes>
+        <CreateNFT/>
       <Footer/>
     </div>
   )

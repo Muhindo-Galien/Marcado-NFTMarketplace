@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { setGlobalState } from '../store';
 
 const NavBar = () => {
 const[opened, setOpened] = useState(false)
@@ -50,8 +51,8 @@ const handeOpenIt = ()=>{
 			</Link>
 				</li>
 		</ul>
-		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-4 px-6  text-sm text-gray-500 font-medium  rounded-sm transition duration-200 " href="#">Create</a>
-		<a class="hidden lg:inline-block py-3 px-6 bg-white hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200" href="#">Connect</a>
+		<button class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-4 px-6  text-sm text-gray-500 font-medium  rounded-sm transition duration-200 " onClick={()=>setGlobalState('modal', 'scale-100') }>Create</button>
+		<button  class="hidden lg:inline-block py-3 px-6 bg-white hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200" href="#">Connect</button>
 	</nav>
 	<div class={opened?"navbar-menu relative z-50":"hidden"}>
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
