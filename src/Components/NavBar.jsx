@@ -8,7 +8,7 @@ const handeOpenIt = ()=>{
 }
 
   return (
-    <div>
+    <div className='max-w-6xl mx-auto'>
      <nav class="relative px-4 py-4 flex justify-between items-center font-globalFont">
 		<a class="text-3xl font-bold leading-none" href="#">
 		<Link to={'/'}>
@@ -33,19 +33,19 @@ const handeOpenIt = ()=>{
 			</li>
 
 			<li>
-				<Link to={'/mission'}>
+				<Link to={'/'}>
 					<a class="text-sm text-gray-400 hover:text-gray-500 font-medium " href="#">Features</a>
 				</Link>
 			</li>
 			
 			<li>
-			<Link to={'/about'}>
+			<Link to={'/'}>
 					<a class="text-sm text-gray-400 hover:text-gray-500 font-medium " href="#">Community</a>
 			</Link>
 			</li>
 		
 			<li>
-			<Link to={'/contact'}>
+			<Link to={'/my-list'}>
 				<a class="text-sm text-gray-400 hover:text-gray-500 font-medium " href="#">My Nfts</a>
 			</Link>
 				</li>
@@ -78,18 +78,18 @@ const handeOpenIt = ()=>{
 					</Link>
 					</li>
 						<li class="mb-1">
-							<Link to={'/mission'} onClick={()=>handeOpenIt()}>
+							<Link to={'/'} onClick={()=>handeOpenIt()}>
 									<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Features</a>
 							</Link>
 						</li>
 						<li class="mb-1">
-							<Link to={'/about'} onClick={()=>handeOpenIt()}>
+							<Link to={'/'} onClick={()=>handeOpenIt()}>
 									<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Community</a>
 							</Link>
 						</li>
 
 						<li class="mb-1">
-							<Link to={'/team'} onClick={()=>handeOpenIt()}>
+							<Link to={'/my-list'} onClick={()=>handeOpenIt()}>
 									<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">My NFT's</a>
 							</Link>
 						</li>

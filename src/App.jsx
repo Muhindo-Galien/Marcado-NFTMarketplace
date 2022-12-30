@@ -1,10 +1,20 @@
+import { Route, Routes } from 'react-router-dom'
+import Footer from './Components/Footer'
 import LandingPage from "./Components/LandingPage"
+import MyList from './Components/MyList'
+import NavBar from "./Components/NavBar"
+import NFTDetails from './Components/NFTDetails'
 
 const App = () => {
   return (
     <div className="min-h-screen">
-      
-      <LandingPage/>
+      <NavBar/>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/nfts/:id" element={<NFTDetails />} />
+          <Route path="/my-list" element={<MyList />} />
+        </Routes>
+      <Footer/>
     </div>
   )
 }
