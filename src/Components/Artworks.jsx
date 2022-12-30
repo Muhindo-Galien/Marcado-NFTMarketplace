@@ -40,7 +40,7 @@ const Card=({nft})=>{
                     />
                     <p className='ml-4 text-gray-400 font-medium'>0x21...786a</p>
                 </div>
-                <p className='font-semibold'>12 ETH</p>
+                <p className='text-gradient'>12 ETH</p>
             </div>
             <img className='rounded-lg ' src="https://cdn.geekwire.com/wp-content/uploads/2022/07/melaniabilustracion-No-Planet-B-square-630x630.jpg" alt="NFT" />
             <h2 className='my-2  text-gray-500 font-medium'> Sad Karaba</h2>

@@ -20,6 +20,7 @@ body {
   background: -webkit-linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(236,211,133,1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 .getstarted{
   background: -moz-linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(236,211,133,1) 100%);

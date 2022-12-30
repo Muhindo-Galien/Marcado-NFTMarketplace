@@ -5,7 +5,7 @@ import {MdOpenInNew} from 'react-icons/md'
 
 const Transactions = () => {
   return (
-    <div className='my-4  pb-10 mx-auto font-globalFont'>
+    <div className='my-4  pb-10 mx-auto font-globalFont '>
       <h2 className='mb-4 text-gray-400 text-3xl font-globalFont font-semibold text-center '>Transaction History</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-4 lg:gap-2 py-2.5 mx-4">
         {Array(5)
@@ -28,7 +28,7 @@ export default Transactions
 const Transaction = ({trans})=>{
   return(
     <div 
-    className='flex justify-between items-center border  text-gray-500 w-full shadow-sm rounded-lg my-2 px-3 py-1'>
+    className='flex justify-between items-center border bg-gray-50 text-gray-500 w-full shadow-sm rounded-lg my-2 px-3 py-1'>
       <div className='rounded-md shadow-sm text-green-700 text-2xl'>
         <BiTransfer/>
       </div>

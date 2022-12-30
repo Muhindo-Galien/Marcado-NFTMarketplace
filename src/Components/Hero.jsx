@@ -16,7 +16,7 @@ const Hero = () => {
             <p className='text-gray-400 font-normal'>Grow your sales faster with our community</p>
           </div>
           <div className=' flex gap-4 mt-6'>
-            <button disabled className=' px-6 py-3 bg-white rounded-xl getstarted'>Get Started</button>
+            <button disabled className=' mr-4 px-6 py-3 text-gray-50 rounded-xl getstarted font-medium'>Get Started</button>
             <button className=' px-6 py-3  rounded-xl bg-inherit border-gray-300 border  text-gradient' onClick={()=>setGlobalState('modal', 'scale-100') }>Create NFT's</button>
           </div>
           <div className='flex items-center justify-between w-3/4 mt-6'>
