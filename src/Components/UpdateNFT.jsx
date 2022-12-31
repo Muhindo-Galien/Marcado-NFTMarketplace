@@ -1,32 +1,38 @@
 import React, { useState } from 'react'
 import {
-  setGlobalState,
   useGlobalState,
+  setGlobalState,
+  setLoadingMsg,
+  setAlert,
 } from '../store/index'
 import {AiOutlineCloseCircle} from 'react-icons/ai'
+import { updateNFTPrice } from '../Blockchain.services'
+
 
 const UpdateNFT = () => {
   const [updateModal] = useGlobalState('updateModal')
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
-  const [description, setDescription] = useState('')
-  const [fileUrl, setFileUrl] = useState('')
-  const [imgBase64, setImgBase64] = useState(null)
+  const [nft]= useGlobalState('nft')
+  const [price, setPrice] = useState(nft?.cost)
+  
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!price || price <= 0) return
 
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    closeModal()
-  }
-  const resetForm = ()=>{
-    setFileUrl('')
-    setDescription(nul)
-    setTitle('')
-    setPrice('')
-  }
-  const closeModal = () =>{
-    setGlobalState('updateModal', 'scale-0')
-    resetForm()
-    
+    setGlobalState('modal', 'scale-0')
+    setGlobalState('loading', { show: true, msg: 'Initiating price update...' })
+
+    try {
+      setLoadingMsg('Price updating...')
+      setGlobalState('updateModal', 'scale-0')
+
+      await updateNFTPrice({ ...nft, cost: price })
+      setAlert('Price updated...', 'green')
+      window.location.reload()
+    } catch (error) {
+      console.log('Error updating file: ', error)
+      setAlert('Update failed...', 'red')
+    }
   }
   return (
     <div 
@@ -37,7 +43,7 @@ const UpdateNFT = () => {
       <div className='w-11/12 md:w-3/12 h-7/12 p-4 bg-gray-50 shadow-lg rounded-xl text-gray-400'>
         <form className='flex flex-col' onSubmit={handleSubmit}>
           <div className='flex items-center justify-between'>
-              <h2 className='text-gray-400 font-semibold text-lg'>Update NFT Price</h2>
+              <h2 className='text-gray-400 font-semibold text-lg'>Edit NFT Price</h2>
             <button type='button' onClick={closeModal}>
               <AiOutlineCloseCircle className='font-bold text-2xl text-gray-900'/>
             </button>

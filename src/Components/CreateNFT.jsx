@@ -1,9 +1,29 @@
-import React, { useState } from 'react'
+
 import {
-  setGlobalState,
   useGlobalState,
-} from '../store/index'
-import {AiOutlineCloseCircle} from 'react-icons/ai'
+  setGlobalState,
+  setLoadingMsg,
+  setAlert,
+} from '../store'
+import { useState } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { create } from 'ipfs-http-client'
+import { mintNFT } from '../Blockchain.services'
+
+const auth =
+  'Basic ' +
+  Buffer.from(
+    '2J8gqBuY8zIQ6PYhBJuCrEfU7S8' + ':' + 'b53832455a0e8a10f57ebc60192f3e93',
+  ).toString('base64')
+
+const client = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  headers: {
+    authorization: auth,
+  },
+})
 
 const CreateNFT = () => {
   const [modal] = useGlobalState('modal')
@@ -13,19 +33,54 @@ const CreateNFT = () => {
   const [fileUrl, setFileUrl] = useState('')
   const [imgBase64, setImgBase64] = useState(null)
 
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    closeModal()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!title || !price || !description) return
+
+    setGlobalState('modal', 'scale-0')
+    setGlobalState('loading', { show: true, msg: 'Uploading IPFS data...' })
+
+    try {
+      const created = await client.add(fileUrl)
+      const metadataURI = `https://ipfs.io/ipfs/${created.path}`
+      const nft = { title, price, description, metadataURI }
+
+      setLoadingMsg('Intializing transaction...')
+      setFileUrl(metadataURI)
+      await mintNFT(nft)
+
+      resetForm()
+      setAlert('Minting completed...', 'green')
+      window.location.reload()
+    } catch (error) {
+      console.log('Error uploading file: ', error)
+      setAlert('Minting failed...', 'red')
+    }
   }
-  const resetForm = ()=>{
-    setFileUrl('')
-    setDescription(nul)
-    setTitle('')
-    setPrice('')
+
+  const changeImage = async (e) => {
+    const reader = new FileReader()
+    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0])
+
+    reader.onload = (readerEvent) => {
+      const file = readerEvent.target.result
+      setImgBase64(file)
+      setFileUrl(e.target.files[0])
+    }
   }
-  const closeModal = () =>{
+
+  const closeModal = () => {
     setGlobalState('modal', 'scale-0')
     resetForm()
+  }
+
+  const resetForm = () => {
+    setFileUrl('')
+    setImgBase64(null)
+    setTitle('')
+    setPrice('')
+    setDescription('')
   }
   return (
     <div 
@@ -44,7 +99,8 @@ const CreateNFT = () => {
           <div className='flex justify-center items-center rounded-lg mt-4'>
             <div className='w-20 h-20 overflow-hidden  shrink-0'>
               <img className='rounded-full h-full w-full object-cover cursor-pointer' 
-          src='https://lawire.com/wp-content/uploads/elementor/thumbs/16-1-puzy5fol3t8ul4ioyf61thcaccskxusk57i5dftl68.png'
+          src={ imgBase64 ||
+            'https://lawire.com/wp-content/uploads/elementor/thumbs/16-1-puzy5fol3t8ul4ioyf61thcaccskxusk57i5dftl68.png'}
               alt="NFT" />
             </div>
           </div>
@@ -63,6 +119,7 @@ const CreateNFT = () => {
                 hover:file:text-gray-50
                   hover:file:bg-[rgba(34,193,195,1)]
                   cursor-pointer focus:ring-0 focus:outline-none"
+                  onChange={changeImage}
               required
                />
             </label>

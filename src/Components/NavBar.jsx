@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { setGlobalState } from '../store';
+import { connectWallet } from '../Blockchain.services';
+import { setGlobalState, truncate, useGlobalState } from '../store';
 
 const NavBar = () => {
+const [connectedAccount] = useGlobalState('connectedAccount')
 const[opened, setOpened] = useState(false)
 const handeOpenIt = ()=>{
 	setOpened(!opened)
@@ -52,7 +54,13 @@ const handeOpenIt = ()=>{
 				</li>
 		</ul>
 		<button class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-4 px-6  text-sm text-gray-500 font-medium  rounded-sm transition duration-200 " onClick={()=>setGlobalState('modal', 'scale-100') }>Create</button>
-		<button  class="hidden lg:inline-block py-3 px-6 bg-white hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200" href="#">Connect</button>
+		{
+			connectedAccount?(
+				<button disabled class="hidden lg:inline-block py-3 px-4 text-gray-100  text-sm ext-gray-900 font-medium rounded-full transition duration-200 getstarted" >{truncate(connectedAccount,6,8,17)}</button>
+			):(
+				<button  class="hidden lg:inline-block py-3 px-6 bg-white hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200 " onClick={connectWallet}>Connect</button>
+			)
+		}
 	</nav>
 	<div class={opened?"navbar-menu relative z-50":"hidden"}>
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -98,8 +106,15 @@ const handeOpenIt = ()=>{
 			</div>
 			<div class="mt-auto">
 				<div class="pt-6 font-globalFont">
-					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" href="#" onClick={()=>{setGlobalState('modal', 'scale-100') ,handeOpenIt()}}>Create</button>
-					<button  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center w-full" href="#"  onClick={()=>handeOpenIt()}>Connect</button>
+					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" onClick={()=>{setGlobalState('modal', 'scale-100') ,handeOpenIt()}}>Create</button>
+					{
+						connectedAccount?(
+							<button  class="block  mb-3 px-6 py-3 text-gray-100 font-semibold rounded-lg getstarted text-center w-full" >{truncate(connectedAccount,7,8,19)}</button>
+						):(
+
+							<button  class="block  mb-3 px-6 py-3 bg-white rounded-lg getstarted text-center w-full"   onClick={()=>{handeOpenIt(), connectWallet()}}>Connect</button>
+						)
+					}
 				
 				</div>
 			</div>

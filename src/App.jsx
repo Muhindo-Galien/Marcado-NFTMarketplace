@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { getAllNFTs, getMyNFTs, isWallectConnected } from './Blockchain.services'
 import Alert from './Components/Alert'
 import CreateNFT from './Components/CreateNFT'
 import Footer from './Components/Footer'
@@ -10,6 +12,12 @@ import NFTDetails from './Components/NFTDetails'
 import UpdateNFT from './Components/UpdateNFT'
 
 const App = () => {
+  useEffect(async() => {
+    await isWallectConnected()
+    // await getMyNFTs()
+    await getAllNFTs()
+  }, [])
+  
   return (
     <div className="min-h-screen">
       <NavBar/>
