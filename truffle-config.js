@@ -11,6 +11,9 @@ module.exports = {
       port: 8545,
       network_id: '*', // Match any network id
     },
+    goerli:{
+      
+    }
   },
   contracts_directory: './src/contracts/',
   contracts_build_directory: './src/abis/',
