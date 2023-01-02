@@ -15,14 +15,14 @@ const Alert = () => {
       <div
         className="flex gap-4 justify-start items-center
         bg-[#fff] shadow-xl  rounded-lg
-        min-w-min py-2 px-10"
+       font-globalFont min-w-min py-2 px-10"
       >
         {alert.color == 'red' ? (
           <FaRegTimesCircle className="text-red-600 text-4xl" />
         ) : (
           <BsCheck2Circle className="text-green-600 text-4xl" />
         )}
-        <p className="text-green-600 font-semibold text-lg">{alert.msg}</p>
+        <p className="text-green-600 font-medium text-base">{alert.msg}</p>
       </div>
     </div>
   )

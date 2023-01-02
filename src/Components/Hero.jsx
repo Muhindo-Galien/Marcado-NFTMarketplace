@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Identicon from 'react-identicons'
-import { setGlobalState } from '../store'
+import Web3 from 'web3'
+import { setGlobalState, truncate, useGlobalState } from '../store'
 
 const Hero = () => {
+  const [connectedAccount]=useGlobalState('connectedAccount')
   return (
     <div className='mx-4 flex flex-col md:flex-row justify-between items-center py-14 font-globalFont'>
       <div className='md:w-3/5 w-full'>
@@ -40,6 +42,7 @@ const Hero = () => {
         <img className='h-[300px] w-full  mb-3 object-cover rounded-xl' src="http://tokenhype.io/wp-content/uploads/2022/03/Heade-Spaces.NFT_.jpg" alt="Hero-nft-profile" />
         <hr />
         <div className='mt-2 flex justify-between items-center text-gray-400 gap-4'>
+        {!connectedAccount?(
           <div className='flex'>
             <Identicon
             className='h-10 w-10 object-contain rounded-full'
@@ -47,14 +50,28 @@ const Hero = () => {
             size={50}
             />
             <div className='ml-4 '>
-              <p className='text-gray-400 font-semibold'>0x21...786a</p>
+                <p className='text-gray-400 font-semibold'>Connect Your wallet</p>
+              <small className='text-gradient text-sm'>You</small>
+            </div>
+          </div>):(
+            <div className='flex'>
+            <Identicon
+            className='h-10 w-10 object-contain rounded-full'
+            string={connectedAccount}
+            size={50}
+            />
+            <div className='ml-4 '>
+                <p className='text-gray-400 font-semibold'>{truncate(connectedAccount,7,8,19)}</p>  
               <small className='text-gradient text-sm'>You</small>
             </div>
           </div>
-          <div className=' font-semibold rounded-xl'>
+          )}
+          
+
+          {/* <div className=' font-semibold rounded-xl'>
             <h4 >Balance</h4>
             <p className='text-gradient'>0.007 ETH</p>
-          </div>
+          </div> */}
 
         </div>
       </div>

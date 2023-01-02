@@ -10,6 +10,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { create } from 'ipfs-http-client'
 import { mintNFT } from '../Blockchain.services'
 
+
 const auth =
   'Basic ' +
   Buffer.from(
@@ -34,54 +35,54 @@ const CreateNFT = () => {
   const [imgBase64, setImgBase64] = useState(null)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    if (!title || !price || !description) return
+  if (!title || !price || !description) return
 
-    setGlobalState('modal', 'scale-0')
-    setGlobalState('loading', { show: true, msg: 'Uploading IPFS data...' })
+  setGlobalState('modal', 'scale-0')
+  setGlobalState('loading', { show: true, msg: 'Uploading IPFS data...' })
 
-    try {
-      const created = await client.add(fileUrl)
-      const metadataURI = `https://ipfs.io/ipfs/${created.path}`
-      const nft = { title, price, description, metadataURI }
+  try {
+    const created = await client.add(fileUrl)
+    const metadataURI = `https://ipfs.io/ipfs/${created.path}`
+    const nft = { title, price, description, metadataURI }
 
-      setLoadingMsg('Intializing transaction...')
-      setFileUrl(metadataURI)
-      await mintNFT(nft)
+    setLoadingMsg('Intializing transaction...')
+    setFileUrl(metadataURI)
+    await mintNFT(nft)
 
-      resetForm()
-      setAlert('Minting completed...', 'green')
-      window.location.reload()
-    } catch (error) {
-      console.log('Error uploading file: ', error)
-      setAlert('Minting failed...', 'red')
-    }
-  }
-
-  const changeImage = async (e) => {
-    const reader = new FileReader()
-    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0])
-
-    reader.onload = (readerEvent) => {
-      const file = readerEvent.target.result
-      setImgBase64(file)
-      setFileUrl(e.target.files[0])
-    }
-  }
-
-  const closeModal = () => {
-    setGlobalState('modal', 'scale-0')
     resetForm()
+    setAlert('Minting completed...', 'green')
+    window.location.reload()
+  } catch (error) {
+    console.log('Error uploading file: ', error)
+    setAlert('Minting failed...', 'red')
   }
+}
 
-  const resetForm = () => {
-    setFileUrl('')
-    setImgBase64(null)
-    setTitle('')
-    setPrice('')
-    setDescription('')
+const changeImage = async (e) => {
+  const reader = new FileReader()
+  if (e.target.files[0]) reader.readAsDataURL(e.target.files[0])
+
+  reader.onload = (readerEvent) => {
+    const file = readerEvent.target.result
+    setImgBase64(file)
+    setFileUrl(e.target.files[0])
   }
+}
+
+const closeModal = () => {
+  setGlobalState('modal', 'scale-0')
+  resetForm()
+}
+
+const resetForm = () => {
+  setFileUrl('')
+  setImgBase64(null)
+  setTitle('')
+  setPrice('')
+  setDescription('')
+}
   return (
     <div 
     className={`fixed top-0 left-0 w-screen h-screen

@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import {
-  useGlobalState,
+  setAlert,
   setGlobalState,
   setLoadingMsg,
-  setAlert,
+  useGlobalState,
 } from '../store/index'
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { updateNFTPrice } from '../Blockchain.services'
 
-
 const UpdateNFT = () => {
   const [updateModal] = useGlobalState('updateModal')
   const [nft]= useGlobalState('nft')
-  const [price, setPrice] = useState(nft?.cost)
-  
-  
+  const [price, setPrice] = useState('')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!price || price <= 0) return
@@ -33,6 +31,9 @@ const UpdateNFT = () => {
       console.log('Error updating file: ', error)
       setAlert('Update failed...', 'red')
     }
+  }
+  const closeModal = () =>{
+    setGlobalState('updateModal', 'scale-0')
   }
   return (
     <div 
