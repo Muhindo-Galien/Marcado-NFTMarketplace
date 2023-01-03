@@ -11,8 +11,6 @@ contract MarcadoNFT is ERC721Enumerable, Ownable {
     mapping(uint256 => address) public holderOf;
      //This mapping maps Id to token info and is helpful when retrieving details about a Id
     mapping(uint256 => TransactionStruct) private idToTransactionStruct;
-    address public artist;
-    uint256 public royalityFee;
     uint256 public supply = 0;
     uint256 public totalTx = 0;
     uint256 public cost = 0.01 ether;
@@ -40,13 +38,9 @@ contract MarcadoNFT is ERC721Enumerable, Ownable {
 
     constructor(
         string memory _name,
-        string memory _symbol,
-        uint256 _royalityFee,
-        address _artist
-    ) ERC721(_name, _symbol) {
-        royalityFee = _royalityFee;
-        artist = _artist;
-    }
+        string memory _symbol
+
+    ) ERC721(_name, _symbol) {}
 
     function payToMint(
         string memory title,
@@ -58,11 +52,7 @@ contract MarcadoNFT is ERC721Enumerable, Ownable {
         require(existingURIs[metadataURI] == 0, "This NFT is already minted!");
         require(msg.sender != owner(), "Sales not allowed!");
         
-
-        uint256 royality = (msg.value * royalityFee) / 100;
-        payTo(artist, royality);
-        payTo(owner(), (msg.value - royality));
-
+        payTo(owner(), (msg.value));
         supply++;
 
         minted.push(
@@ -103,9 +93,7 @@ contract MarcadoNFT is ERC721Enumerable, Ownable {
         require(msg.value >= minted[id - 1].cost, "Ether too low for purchase!");
         require(msg.sender != minted[id - 1].owner, "Operation Not Allowed!");
 
-        uint256 royality = (msg.value * royalityFee) / 100;
-        payTo(artist, royality);
-        payTo(minted[id - 1].owner, (msg.value - royality));
+        payTo(minted[id - 1].owner, msg.value);
 
         totalTx++;
 

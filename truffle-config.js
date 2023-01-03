@@ -12,12 +12,16 @@ module.exports = {
       network_id: '*', // Match any network id
     },
     goerli:{
-      
+      provider:  () => new HDWalletProvider(process.env.DEPLOYER_KEY, `https://goerli.infura.io/v3/${process.env.ENDPOINT_URL}`),
+      network_id: 5,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
     }
   },
   contracts_directory: './src/contracts/',
   contracts_build_directory: './src/abis/',
-  // Configure your compilers
+  // Configure the compilers
   compilers: {
     solc: {
       version: '0.8.11',

@@ -1,13 +1,10 @@
 import React from 'react'
 import Identicon from 'react-identicons'
-import { Link } from 'react-router-dom'
 import { truncate } from '../store'
 
 export const NFTCard = ({nft}) => {
   return (
     <div className='p-4 border rounded-xl shadow-sm font-globalFont'>
-       <Link to={'/nfts/' + nft?.id}>
-
             <div className='flex justify-between items-center pb-2'>
                 <div className='flex justify-center items-center'>
                   <Identicon
@@ -22,7 +19,6 @@ export const NFTCard = ({nft}) => {
             <img className='rounded-lg ' src={nft?.metadataURI} alt="NFT" />
             <h2 className='my-2  text-gray-500 font-medium'> {nft?.title}</h2>
             <button className='px-6 py-3 bg-gray-200 text-gray-600 rounded-xl w-full '>View Details</button>
-       </Link>
     </div>
   )
 }
