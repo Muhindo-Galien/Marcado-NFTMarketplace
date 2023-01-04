@@ -19,7 +19,7 @@ const Artwork = () => {
 
 
   return (
-    <div className='flex flex-col text-gray-400 w-full mx-auto justify-center items-center font-globalFont'>
+    <div className='flex flex-col text-gray-400 w-full mx-auto justify-center items-center font-globalFont pb-10'>
     
         {collection.length > 0 ? (
           <>
@@ -38,7 +38,7 @@ const Artwork = () => {
       </div>
       <div className="flex flex-row justify-center my-5">
       {collection.length > 0 && nfts.length > collection.length ? (
-        <button type='button' className=' px-6 py-2.5 rounded-3xl getstarted
+        <button type='button' className='mb-10 px-6 py-2.5 rounded-3xl getstarted
          text-gray-50 flex flex-row justify-center items-center gap-1 cursor-pointer'
          onClick={() => setEnd(end + count)}
          >

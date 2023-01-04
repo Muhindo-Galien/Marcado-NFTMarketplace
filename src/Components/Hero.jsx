@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Identicon from 'react-identicons'
-import Web3 from 'web3'
+import { connectWallet } from '../Blockchain.services'
 import { setGlobalState, truncate, useGlobalState } from '../store'
 
 const Hero = () => {
@@ -20,7 +20,7 @@ const Hero = () => {
           <div className=' flex gap-4 mt-6'>
             <button disabled className=' mr-4 px-6 py-3 text-gray-50 rounded-xl getstarted font-medium'>Get Started</button>
             <button className=' px-6 py-3  rounded-xl bg-inherit border-gray-300 border  border-[rgba(34,193,195,1)]
-                text-[rgba(34,193,195,1)]' onClick={()=>setGlobalState('modal', 'scale-100') }>Create NFT's</button>
+                text-[rgba(34,193,195,1)]' onClick={connectedAccount?()=>setGlobalState('modal', 'scale-100'):connectWallet} >Create NFT's</button>
           </div>
           <div className='flex items-center justify-between w-3/4 mt-6'>
             <div className='text-gray-400'>

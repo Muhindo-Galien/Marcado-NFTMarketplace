@@ -14,7 +14,7 @@ const MyList = () => {
   )
 
   return (
-    <div className='max-w-6xl mx-auto my-10 '>
+    <div className='max-w-6xl mx-auto py-10 '>
        <div className='my-6 pb-10'>
         {myNFTs.length <=0?(
           <h2 className='text-3xl mb-2 font-globalFont font-semibold text-left mx-4 md:text-center text-gray-400'>You don't have an NFT yet!</h2>
