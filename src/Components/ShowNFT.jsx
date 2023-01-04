@@ -52,7 +52,7 @@ const ShowNFT = () => {
           {/* rign */}
           <div className='md:w-3/5 w-full px-4 sm:px-0'>
               <h2 className='text-xl mb-2 font-globalFont font-semibold text-gray-400 capitalize'>{nft?.title}</h2>
-              <p className='text-[13px] my-2'>{nft?.description}</p>
+              <p className='text-[13px] my-2 font-medium'>{nft?.description}</p>
               <div className='my-1 flex flex-col'>
               <h3 className='text-[14px] text-gray-600 font-base rounded-xl transition duration-200'>Owned by</h3>
                 <div className='flex justify-start items-center'>
@@ -68,7 +68,7 @@ const ShowNFT = () => {
               </div>
               <div className='flex justify-between items-center'>
                 <div className='my-1'>
-                  <h3 className='text-base mb-.5'>current price</h3>
+                  <h3 className='text-base mb-.5 font-medium'>current price</h3>
                   <h1 className='text-xl mb-2 font-globalFont font-semibold text-gray-400'>{nft?.cost} ETH</h1>
                 </div>
 

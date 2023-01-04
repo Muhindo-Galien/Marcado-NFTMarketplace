@@ -27,17 +27,19 @@ const getEtheriumContract = async () => {
 
 const connectWallet = async () => {
   try {
-    if (!ethereum) return alert('Please install Metamask')
+    if (!ethereum) return setAlert('Please install Metamask', 'red')
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-    setGlobalState('connectedAccount', accounts[0].toLowerCase())
+    setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
+    getAllNFTs()
+    window.location.reload()
   } catch (error) {
-    reportError(error)
+    console.log(error.message)
   }
 }
 
 const isWallectConnected = async () => {
   try {
-    if (!ethereum) return alert('Please install Metamask')
+    if (!ethereum) return setAlert('Please install Metamask', 'red')
     const accounts = await ethereum.request({ method: 'eth_accounts' })
 
     window.ethereum.on('chainChanged', (chainId) => {
@@ -45,15 +47,19 @@ const isWallectConnected = async () => {
     })
 
     window.ethereum.on('accountsChanged', async () => {
-      setGlobalState('connectedAccount', accounts[0].toLowerCase())
+      setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
       await isWallectConnected()
     })
 
     if (accounts.length) {
-      setGlobalState('connectedAccount', accounts[0].toLowerCase())
+      setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
+      getAllNFTs()
     } else {
-      alert('Please connect wallet.')
+      setAlert('Please connect wallet here', 'red')
       console.log('No accounts found.')
+     
+      setGlobalState('connectedAccount','')
+
     }
   } catch (error) {
     reportError(error)
@@ -85,7 +91,7 @@ const getAllNFTs = async () => {
     setGlobalState('nfts', structuredNfts(nfts))
     setGlobalState('transactions', structuredNfts(transactions))
   } catch (error) {
-    reportError(error)
+    console.log(error)
   }
 }
 

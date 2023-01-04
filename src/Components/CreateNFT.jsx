@@ -9,8 +9,9 @@ import { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { create } from 'ipfs-http-client'
 import { mintNFT } from '../Blockchain.services'
+import { FiUpload } from 'react-icons/fi';
 
-
+const style = { color: "white", fontSize: "1.5em" }
 const auth =
   'Basic ' +
   Buffer.from(
@@ -27,6 +28,7 @@ const client = create({
 })
 
 const CreateNFT = () => {
+  const [isMinting,setIsMinting] = useState(false)
   const [modal] = useGlobalState('modal')
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
@@ -46,13 +48,14 @@ const CreateNFT = () => {
     const created = await client.add(fileUrl)
     const metadataURI = `https://ipfs.io/ipfs/${created.path}`
     const nft = { title, price, description, metadataURI }
-
+    setIsMinting(true)
     setLoadingMsg('Intializing transaction...')
     setFileUrl(metadataURI)
     await mintNFT(nft)
 
     resetForm()
     setAlert('Minting completed...', 'green')
+    setIsMinting(false)
     window.location.reload()
   } catch (error) {
     console.log('Error uploading file: ', error)
@@ -89,7 +92,7 @@ const resetForm = () => {
     flex items-center justify-center bg-black bg-opacity-30 
     transform duration-300 font-globalFont ${modal}`}
     >
-      <div className='w-11/12 md:w-3/12 h-7/12 p-4 bg-gray-50 shadow-lg rounded-xl text-gray-400'>
+      <div className='w-11/12 md:w-3/12 h-7/12 p-4 bg-gray-50 shadow-lg rounded-xl text-gray-400 '>
         <form className='flex flex-col' onSubmit={handleSubmit}>
           <div className='flex items-center justify-between'>
               <h2 className='text-gray-400 font-semibold text-lg'>Create NFT</h2>
@@ -97,21 +100,26 @@ const resetForm = () => {
               <AiOutlineCloseCircle className='font-bold text-2xl text-gray-900'/>
             </button>
           </div>
-          <div className='flex justify-center items-center rounded-lg mt-4'>
-            <div className='w-20 h-20 overflow-hidden  shrink-0'>
+          <div className='flex justify-center items-center rounded-lg mt-1'>
+            <div className='w-24 h-24 overflow-hidden  shrink-0'>
               <img className='rounded-full h-full w-full object-cover cursor-pointer' 
           src={ imgBase64 ||
-            'https://lawire.com/wp-content/uploads/elementor/thumbs/16-1-puzy5fol3t8ul4ioyf61thcaccskxusk57i5dftl68.png'}
+            'https://www.shutterstock.com/image-vector/picture-icon-vector-260nw-1353828443.jpg'}
               alt="NFT" />
             </div>
           </div>
-          <div className="flex flex-row justify-between items-center bg-gray-100 rounded-lg mt-5">
-            <label className="block">
+          <div className="flex flex-row justify-center items-center rounded-lg mt-4">
+            <label className="flex text-sm gap-2 justify-center items-center shadow-xl icon rounded-full w-10 h-10
+                bg-transparent cursor-pointer getstarted" for="file-input">
+                  <FiUpload style={style} /> 
+            </label>
               <span className="sr-only">Choose profile photo</span>
               <input
+              required
+                id="file-input"
                 type="file"
                 accept="image/png, image/gif, image/jpeg, image/webp"
-                className="block w-full text-sm text-slate-500
+                className=" w-full text-sm text-slate-500 hidden
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-lg file:border-0
                   file:shadow-lg
@@ -121,9 +129,8 @@ const resetForm = () => {
                   hover:file:bg-[rgba(34,193,195,1)]
                   cursor-pointer focus:ring-0 focus:outline-none"
                   onChange={changeImage}
-              required
+
                />
-            </label>
           </div>
           <div className="flex flex-row justify-between items-center bg-gray-50 border rounded-lg mt-5">
             <input
@@ -176,7 +183,7 @@ const resetForm = () => {
               drop-shadow-xl border border-transparent
               focus:outline-none focus:ring mt-5"
           >
-            Mint Now
+            {isMinting?'Minting':'Mint Now'}
           </button>
         </form>
       </div>

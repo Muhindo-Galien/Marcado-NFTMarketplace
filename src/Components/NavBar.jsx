@@ -4,7 +4,7 @@ import { connectWallet } from '../Blockchain.services';
 import { setGlobalState, truncate, useGlobalState } from '../store';
 
 const NavBar = () => {
-const [connectedAccount] = useGlobalState('connectedAccount')
+	const [connectedAccount] = useGlobalState('connectedAccount')
 const[opened, setOpened] = useState(false)
 const handeOpenIt = ()=>{
 	setOpened(!opened)
@@ -58,7 +58,7 @@ const handeOpenIt = ()=>{
 			connectedAccount?(
 				<button disabled class="hidden lg:inline-block py-3 px-4 text-gray-100  text-sm ext-gray-900 font-medium rounded-full transition duration-200 getstarted" >{truncate(connectedAccount,6,8,17)}</button>
 			):(
-				<button  class="hidden lg:inline-block py-3 px-6 bg-white hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200 " onClick={connectWallet}>Connect</button>
+				<button  class="hidden lg:inline-block py-3 px-6 bg-gray-100  hover:bg-gray-100 text-sm ext-gray-900 font-medium rounded-xl transition duration-200 " onClick={connectWallet}>Connect</button>
 			)
 		}
 	</nav>
@@ -108,7 +108,7 @@ const handeOpenIt = ()=>{
 				<div class="pt-6 font-globalFont">
 					<button class="block  mb-3 px-6 py-3 bg-white rounded-lg border text-center w-full" onClick={()=>{setGlobalState('modal', 'scale-100') ,handeOpenIt()}}>Create</button>
 					{
-						connectedAccount?(
+						connectedAccount&&connectedAccount?(
 							<button  class="block  mb-3 px-6 py-3 text-gray-100 font-semibold rounded-lg getstarted text-center w-full" >{truncate(connectedAccount,7,8,19)}</button>
 						):(
 
